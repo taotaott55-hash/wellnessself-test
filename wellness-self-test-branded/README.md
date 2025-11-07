@@ -1,0 +1,1 @@
+# 品牌体验版：亚健康自测\n\n本地运行：npm install && npm run dev\n\nVercel 设置：Framework=Vite，Build Command=npm run build，Output=dist\n
