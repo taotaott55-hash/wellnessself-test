@@ -1,45 +1,25 @@
 import React from 'react'
-import { useLocation, Link } from 'react-router-dom'
-
+import { Link, useLocation } from 'react-router-dom'
 export default function Result(){
   const { search } = useLocation()
-  const params = new URLSearchParams(search)
-  const score = Number(params.get('score') || 0)
-  const level = params.get('level') || '—'
-
-  const share = async () => {
-    const url = window.location.origin + '/'
-    const text = `我刚做了亚健康自测：总分 ${score}，状态 ${level}。来测一下～`
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: '亚健康自测', text, url })
-      } else {
-        await navigator.clipboard.writeText(url)
-        alert('链接已复制：' + url)
-      }
-    } catch(e){ console.log(e) }
-  }
-
+  const qs = new URLSearchParams(search)
+  const total = Number(qs.get('total') || 0)
+  const level = qs.get('level') || '—'
   return (
-    <section className="mx-auto max-w-4xl px-4 py-14 text-center">
-      <img src="/share-cover.png" alt="" className="mx-auto h-28" />
-      <h1 className="mt-4 text-3xl font-bold">测评完成</h1>
-      <p className="mt-2 text-gray-600">你的总分为 <span className="font-semibold text-gray-900">{score}</span>，状态：<span className="font-semibold text-gray-900">{level}</span></p>
-
-      <div className="mt-6 grid sm:grid-cols-3 gap-4 text-left">
-        {[
-          '规律作息：固定上/下床时间，优先恢复睡眠质量',
-          '均衡饮食：减少精制糖/酒精，多蔬果与蛋白质',
-          '运动处方：每周 3-5 次中等强度有氧 + 力量'
-        ].map((t,i)=>(
-          <div key={i} className="rounded-2xl border bg-white p-4 shadow-sm">✅ {t}</div>
-        ))}
-      </div>
-
-      <div className="mt-8 flex items-center justify-center gap-3">
-        <button onClick={share} className="rounded-2xl px-5 py-3 bg-emerald-600 text-white font-semibold shadow hover:shadow-md">分享给朋友</button>
-        <Link to="/test" className="rounded-2xl px-5 py-3 bg-white border font-semibold hover:shadow">重新测评</Link>
-        <Link to="/" className="rounded-2xl px-5 py-3 bg-white border font-semibold hover:shadow">返回首页</Link>
+    <section className="mx-auto max-w-3xl px-4 py-14">
+      <div className="rounded-3xl border bg-white p-8 shadow-sm">
+        <h2 className="text-2xl font-bold">结果解读</h2>
+        <p className="mt-3 text-gray-700">您的总分：<span className="font-bold">{total}</span></p>
+        <p className="mt-1 text-gray-700">判定状态：<span className="font-bold">{level}</span></p>
+        <ul className="mt-5 space-y-2 text-sm text-gray-700">
+          <li>✅ 保持规律作息与均衡饮食</li>
+          <li>✅ 每周 3-5 次中等强度运动</li>
+          <li>✅ 使用冥想/呼吸放松等方式管理压力</li>
+        </ul>
+        <div className="mt-6 flex gap-3">
+          <Link to="/test" className="rounded-2xl px-5 py-3 bg-white border font-semibold hover:shadow">重新测评</Link>
+          <Link to="/" className="rounded-2xl px-5 py-3 bg-emerald-600 text-white font-semibold shadow hover:shadow-md">返回首页</Link>
+        </div>
       </div>
     </section>
   )

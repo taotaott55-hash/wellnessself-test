@@ -3,14 +3,13 @@ import { Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Test from './pages/Test.jsx'
 import Result from './pages/Result.jsx'
-
 export default function App(){
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-50 to-white text-gray-900">
-      <header className="sticky top-0 z-30 bg-white/70 backdrop-blur border-b">
+      <header className="sticky top-0 z-20 bg-white/70 backdrop-blur border-b">
         <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.svg" alt="Logo" className="h-8 w-8" />
+            <img src="/logo.svg" className="h-8 w-8" alt="logo" />
             <span className="font-semibold">YourBrand 健康实验室</span>
           </Link>
           <nav className="text-sm">
@@ -19,7 +18,6 @@ export default function App(){
           </nav>
         </div>
       </header>
-
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,7 +25,6 @@ export default function App(){
           <Route path="/result" element={<Result />} />
         </Routes>
       </main>
-
       <footer className="mt-16 border-t">
         <div className="mx-auto max-w-6xl px-4 py-6 text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>© {new Date().getFullYear()} YourBrand · All rights reserved</div>
